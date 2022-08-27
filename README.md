@@ -1,16 +1,8 @@
-# gabo
+# Smooth Gabo
 
-A new Flutter project.
+SmoothGabo is a digital version of Gabo, a card game !
 
-## Getting Started
+## Links
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Lab: Rules](https://jejeu.org/jeu.php?id=18)
 - [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
