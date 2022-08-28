@@ -70,7 +70,7 @@ class _SmoothGameWidgetState extends State<SmoothGameWidget> {
     return [
       TextButton(
         onPressed: () {
-          //GameServices().deleteGame(widget.game);
+          GameServices().deleteGame(widget.game);
           toggleGameMenu();
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(

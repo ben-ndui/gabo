@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:gabo/core/app_user.dart';
 import 'package:gabo/core/card_list.dart';
+import 'package:gabo/core/controller/game_controller.dart';
 import 'package:gabo/core/game_model.dart';
 import 'package:gabo/core/services/game_users_services.dart';
 import 'package:gabo/core/smooth_card_model.dart';
@@ -13,32 +14,37 @@ class GameEngine with ChangeNotifier{
   List<SmoothCardModel> deck = [];
   List<AppUser> players = [];
 
-  void init(GameModel game){
-    initDeck();
-    initGame(game);
+  void init(GameController controller){
+    initDeck(controller);
+    initGame(controller);
     notifyListeners();
   }
 
-  void initDeck() {
+  void initDeck(GameController controller) {
     deck = gameCards;
-    print("Deck initialized !");
-    notifyListeners();
+    if(deck.isNotEmpty){
+      print("Deck initialized ! ${deck.toString()}");
+      controller.startGame(players);
+    }else{
+      print("Deck not initialized ! ${deck.toString()}");
+    }
   }
 
-  void initGame(GameModel game) {
-    GameUsersServices().getAllParticipantsByGameUid(game.uid)?.listen((users) {
-      initPlayers(users);
+  void initGame(GameController controller) {
+    GameUsersServices().getAllParticipantsByGameUid(controller.gameSelected!.uid)?.listen((users) {
+      initPlayers(users, controller);
       notifyListeners();
     });
   }
 
-  void initPlayers(List<AppUser> users) {
+  void initPlayers(List<AppUser> users, GameController controller) {
     players = users;
-    if(players.isNotEmpty){
-      print("Players initialized !");
+    if(players.isNotEmpty && deck.isNotEmpty){
+      print("Players initialized ! ${players.toString()}");
     }else{
       print("Players list not initialized !");
     }
+    notifyListeners();
   }
 
   void shuffleDeck(){
@@ -71,6 +77,10 @@ class GameEngine with ChangeNotifier{
   }
 
   void piocher(AppUser player){
+
+  }
+
+  void gameState(GameController controller) {
 
   }
 

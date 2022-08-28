@@ -39,10 +39,11 @@ class _LoginState extends State<Login> {
       height: SmoothConfig.screenHeight,
       child: Form(
         key: loginFormKey,
-        child: ListView(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          padding: EdgeInsets.zero,
+        child: Column(
+          //shrinkWrap: true,
+          //padding: EdgeInsets.zero,
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
           children: [
             Container(
               alignment: Alignment.center,
@@ -52,7 +53,7 @@ class _LoginState extends State<Login> {
                 children: [
                   Lottie.asset(
                     "assets/lottie/game.json",
-                    width: SmoothConfig.screenWidth! / 2,
+                    width: SmoothConfig.screenWidth! * 0.3,
                   ),
                   SmoothText(
                     text: "Smooth Gabo",
@@ -91,37 +92,46 @@ class _LoginState extends State<Login> {
         horizontal: SmoothConfig.screenWidth! * 0.08,
         vertical: SmoothUtile.kDefaultVerticalPadding,
       ),
-      child: TextButton(
-        onHover: (val) {
-          setState(() {
-            btnColor = val;
-          });
-        },
-        onPressed: () {
-          //TODO
-          if (loginFormKey.currentState!.validate()) {
-            authController.loginAnonymously(context);
-          } else {
-            authController.setPseudoError("Veuillez saisir un pseudo s'il vous plait !");
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                backgroundColor: SmoothColor.red,
-                content: SmoothText(
-                  text: "Veuillez saisir un pseudo s'il vous plait !",
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            child: TextButton(
+              onHover: (val) {
+                setState(() {
+                  btnColor = val;
+                });
+              },
+              onPressed: () {
+                //TODO
+                if (loginFormKey.currentState!.validate()) {
+                  authController.loginAnonymously(context);
+                } else {
+                  authController
+                      .setPseudoError("Veuillez saisir un pseudo s'il vous plait !");
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      backgroundColor: SmoothColor.red,
+                      content: SmoothText(
+                        text: "Veuillez saisir un pseudo s'il vous plait !",
+                      ),
+                    ),
+                  );
+                }
+              },
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.all(SmoothConfig.screenWidth! * 0.025),
+                backgroundColor: btnColor ? SmoothColor.primary : SmoothColor.green,
+                primary: SmoothColor.white,
+                shape: RoundedRectangleBorder(
+                  side: BorderSide.none,
+                  borderRadius: BorderRadius.circular(100.0),
                 ),
               ),
-            );
-          }
-        },
-        style: TextButton.styleFrom(
-          padding: EdgeInsets.all(SmoothConfig.screenWidth! * 0.045),
-          backgroundColor: btnColor ? SmoothColor.primary : SmoothColor.green,
-          primary: SmoothColor.white,
-          shape: RoundedRectangleBorder(
-              side: BorderSide.none,
-              borderRadius: BorderRadius.circular(100.0)),
-        ),
-        child: const SmoothText(text: "C'est parti !"),
+              child: const SmoothText(text: "C'est parti !"),
+            ),
+          ),
+        ],
       ),
     );
   }

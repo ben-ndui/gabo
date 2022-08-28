@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gabo/core/controller/auth_controller.dart';
 import 'package:gabo/core/controller/game_controller.dart';
+import 'package:gabo/core/engine/game_engine.dart';
 import 'package:gabo/router/router.gr.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +19,7 @@ Future<void> main() async {
       providers: [
         ChangeNotifierProvider(create: (_) => AuthController()),
         ChangeNotifierProvider(create: (_) => GameController()),
+        ChangeNotifierProvider(create: (_) => GameEngine()),
       ],
       child: const MyApp(),
     ),

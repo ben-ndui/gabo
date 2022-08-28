@@ -103,4 +103,24 @@ class GameController extends ChangeNotifier {
   void removePlayerToGame(AppUser appUser, GameModel game) {
     gameUserServices.deleteUser(game: game, appUser: appUser);
   }
+
+  void redirectUser(List<AppUser> users) {
+
+  }
+
+  void startGame(List<AppUser> players) {
+    GameUsersServices().startGame(gameSelected, players);
+    notifyListeners();
+  }
+
+  void gameStatus(BuildContext context) {
+    final currUser = context.read<AuthController>().currentUser;
+    GameUsersServices().getGameRequestsByUser(gameSelected!, currUser!).listen((event) {
+      for (var req in event) {
+        if(req.message.contains("start")){
+          context.router.replace(const GameScreen());
+        }
+      }
+    });
+  }
 }

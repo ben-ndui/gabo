@@ -17,7 +17,7 @@ class SmoothCardWidget extends StatelessWidget {
       height: SmoothUtile.kCardWidgetHeight,
       padding: EdgeInsets.zero,
       decoration: buildBoxDecoration(),
-      child: Image.network(
+      child: Image.asset(
         card.img,
         fit: BoxFit.cover,
         width: SmoothConfig.screenWidth,
